@@ -3,7 +3,7 @@
 require_relative 'lib/smart_core/type_system/version'
 
 Gem::Specification.new do |spec|
-  spec.required_ruby_version = Gem::Requirement.new('>= 2.5.8')
+  spec.required_ruby_version = Gem::Requirement.new('>= 2.6')
 
   spec.name     = 'smart_type-system'
   spec.version  = SmartCore::TypeSystem::VERSION
@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   spec.homepage = 'https://github.com/smart-rb/smart_type-system'
 
   spec.summary     = 'SmartCore::TypeSystem'
-  spec.description = 'Abstract Type System with a support for various type systems'
+  spec.description = 'Abstract Type System with a support for various commonly used type libs'
   spec.license     = 'MIT'
 
   spec.metadata['homepage_uri']    = spec.homepage
@@ -26,6 +26,9 @@ Gem::Specification.new do |spec|
   spec.bindir = 'exe'
   spec.executables = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
+
+  spec.add_development_dependency 'rbs', '~> 1.0.5'
+  spec.add_development_dependency 'steep', '~> 0.41.0'
 
   spec.add_development_dependency 'bundler',          '~> 2.2'
   spec.add_development_dependency 'rake',             '~> 13.0'

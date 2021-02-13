@@ -1,0 +1,86 @@
+type interop = SmartCore::TypeSystem::Interop
+type interop_op = SmartCore::TypeSystem::Interop::Operation
+
+interface _TypeOpCast
+  def call: (untyped value) -> untyped
+end
+
+interface _TypeOpValid
+  def call: (untyped value) -> bool
+end
+
+interface _TypeOpValidate
+  def call: (untyped value) -> void
+end
+
+type iop_cast = interop_op & _TypeOpCast
+type iop_valid = interop_op & _TypeOpValid
+type iop_validate = interop_op & _TypeOpValidate
+
+module SmartCore
+end
+
+module SmartCore::TypeSystem
+  VERSION: ::String
+end
+
+class SmartCore::TypeSystem::Interop
+  def initialize: (iop_valid op_valid, iop_validate op_validate, iop_cast op_cast) -> void
+  def valid?: (untyped value) -> bool
+  def validate!: (untyped value) -> void
+  def cast: (untyped value) -> untyped
+
+  private
+
+  attr_reader op_valid: iop_valid
+  attr_reader op_validate: iop_validate
+  attr_reader op_cast: iop_cast
+end
+
+class SmartCore::TypeSystem::Interop::Type
+  def initialize: (untyped `type`) -> void
+
+  private
+
+  attr_reader `type`: untyped
+end
+
+class SmartCore::TypeSystem::Interop::Operation
+  def initialize: (untyped `type`) -> void
+  def call: (untyped value) -> void
+
+  private
+
+  attr_reader `type`: untyped
+end
+
+class SmartCore::TypeSystem::Interop::AbstractFactory
+  def self.create: (untyped `type`) -> interop?
+  def self.generic_type_object: () -> untyped
+  def self.prevent_incompatible_type!: (untyped `type`) -> void
+
+  private
+
+  def self.build_op_valid: (untyped `type`) -> iop_valid?
+  def self.build_op_validate: (untyped `type`) -> iop_validate?
+  def self.build_op_cast: (untyped `type`) -> iop_cast?
+  def self.build_interop: (iop_valid? op_valud, iop_validate? op_validate, iop_cast? op_cast) -> interop?
+end
+
+interface _InteropFactory
+  def create: (untyped `type`) -> interop
+  def generic_type_object: () -> untyped
+  def prevent_incompatible_type!: (untyped `type`) -> void
+
+  def build_op_valid: (untyped `type`) -> iop_valid
+  def build_op_validate: (untyped `type`) -> iop_validate
+  def build_op_cast: (untyped `type`) -> iop_cast
+  def build_interop: (iop_valid op_valud, iop_validate op_validate, iop_cast op_cast) -> interop
+end
+
+class SmartCore::TypeSystem::SmartTypes < SmartCore::TypeSystem::Interop
+end
+
+class SmartCore::TypeSystem::SmartTypes::AbstractFactory < SmartCore::TypeSystem::Interop::AbstractFactory
+  extend _InteropFactory
+end
