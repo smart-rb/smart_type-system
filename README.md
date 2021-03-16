@@ -2,6 +2,10 @@
 
 ---
 
+*(in active development)*
+
+---
+
 ## Installation
 
 ```ruby
