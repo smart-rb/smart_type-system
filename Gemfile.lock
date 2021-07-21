@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     smart_type-system (0.0.0)
+      smart_types (~> 0.4)
 
 GEM
   remote: https://rubygems.org/
@@ -92,6 +93,9 @@ GEM
       simplecov_json_formatter (~> 0.1)
     simplecov-html (0.12.3)
     simplecov_json_formatter (0.1.2)
+    smart_engine (0.11.0)
+    smart_types (0.4.0)
+      smart_engine (~> 0.11)
     steep (0.41.0)
       activesupport (>= 5.1)
       ast_utils (>= 0.4.0)

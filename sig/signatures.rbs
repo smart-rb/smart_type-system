@@ -1,5 +1,6 @@
 type interop = SmartCore::TypeSystem::Interop
 type interop_op = SmartCore::TypeSystem::Interop::Operation
+type smt_primitive = SmartCore::Types::Primitive
 
 interface _TypeOpCast
   def call: (untyped value) -> untyped
@@ -83,4 +84,12 @@ end
 
 class SmartCore::TypeSystem::SmartTypes::AbstractFactory < SmartCore::TypeSystem::Interop::AbstractFactory
   extend _InteropFactory
+end
+
+module SmartCore::TypeSystem::SmartTypes::Operation
+  class Base < SmartCore::TypeSystem::Interop::Operation
+  end
+
+  class Cast < Base
+  end
 end
